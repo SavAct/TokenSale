@@ -1,0 +1,9 @@
+*.wasm
+*.wasm.*
+*.code-workspace
+*.eosproj
+*.sh
+.vs/
+.vscode/
+build/
+

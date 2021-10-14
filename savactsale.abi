@@ -1,0 +1,293 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "Owner",
+            "base": "",
+            "fields": [
+                {
+                    "name": "key",
+                    "type": "bytes"
+                },
+                {
+                    "name": "amount",
+                    "type": "int64"
+                },
+                {
+                    "name": "affiliate",
+                    "type": "int64"
+                }
+            ]
+        },
+        {
+            "name": "Ref",
+            "base": "",
+            "fields": [
+                {
+                    "name": "Block",
+                    "type": "uint64"
+                },
+                {
+                    "name": "TrxId",
+                    "type": "checksum256"
+                }
+            ]
+        },
+        {
+            "name": "Star",
+            "base": "",
+            "fields": [
+                {
+                    "name": "amount",
+                    "type": "int64"
+                },
+                {
+                    "name": "user",
+                    "type": "bytes"
+                },
+                {
+                    "name": "mark",
+                    "type": "int64"
+                },
+                {
+                    "name": "gain",
+                    "type": "int64"
+                }
+            ]
+        },
+        {
+            "name": "affiList",
+            "base": "",
+            "fields": [
+                {
+                    "name": "account",
+                    "type": "name"
+                },
+                {
+                    "name": "amount",
+                    "type": "int64"
+                },
+                {
+                    "name": "convinced",
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "amountlist",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "owner",
+                    "type": "Owner[]"
+                }
+            ]
+        },
+        {
+            "name": "clearall",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "createsale",
+            "base": "",
+            "fields": [
+                {
+                    "name": "starttime",
+                    "type": "uint32"
+                }
+            ]
+        },
+        {
+            "name": "payoff",
+            "base": "",
+            "fields": [
+                {
+                    "name": "tokenowner",
+                    "type": "name"
+                },
+                {
+                    "name": "sig",
+                    "type": "signature"
+                },
+                {
+                    "name": "pubkey",
+                    "type": "public_key"
+                },
+                {
+                    "name": "rampayer",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "setconvinced",
+            "base": "",
+            "fields": [
+                {
+                    "name": "affiliate",
+                    "type": "name"
+                },
+                {
+                    "name": "convinced",
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "setpage",
+            "base": "",
+            "fields": [
+                {
+                    "name": "key",
+                    "type": "uint64"
+                },
+                {
+                    "name": "refs",
+                    "type": "Ref[]"
+                },
+                {
+                    "name": "attri",
+                    "type": "string"
+                },
+                {
+                    "name": "fname",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "static_index_table",
+            "base": "",
+            "fields": [
+                {
+                    "name": "key",
+                    "type": "uint64"
+                },
+                {
+                    "name": "fname",
+                    "type": "string"
+                },
+                {
+                    "name": "refs",
+                    "type": "Ref[]"
+                },
+                {
+                    "name": "attri",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "statusstruct",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "start",
+                    "type": "uint32"
+                },
+                {
+                    "name": "started",
+                    "type": "bool"
+                },
+                {
+                    "name": "frozen",
+                    "type": "bool"
+                },
+                {
+                    "name": "release",
+                    "type": "bool"
+                },
+                {
+                    "name": "sold",
+                    "type": "int64"
+                },
+                {
+                    "name": "total",
+                    "type": "asset"
+                },
+                {
+                    "name": "endprice",
+                    "type": "asset"
+                },
+                {
+                    "name": "sp",
+                    "type": "int64"
+                },
+                {
+                    "name": "stars",
+                    "type": "Star[]"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "clearall",
+            "type": "clearall",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "createsale",
+            "type": "createsale",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "payoff",
+            "type": "payoff",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "setconvinced",
+            "type": "setconvinced",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "setpage",
+            "type": "setpage",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "index",
+            "type": "static_index_table",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "nameaffis",
+            "type": "affiList",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "purchased",
+            "type": "amountlist",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "stat",
+            "type": "statusstruct",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": []
+}
