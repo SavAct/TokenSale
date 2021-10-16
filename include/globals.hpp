@@ -91,20 +91,6 @@ public:
 private:
 	const name _self;
 
-	// TABLE statusstruct{
-	// 	uint64_t id;
-	// 	uint32_t start = 0;
-	// 	bool started = false;
-	// 	bool frozen = false;
-	// 	bool release = false;
-	// 	int64_t sold = 0;
-	// 	eosio::asset total = eosio::asset(TotalToken, contractSymbol);
-	// 	eosio::asset endprice = eosio::asset(EndPrice * powl(10, paymentPrecision), paymentSymbol);
-	// 	int64_t sp = StartPrice * powl(10, paymentPrecision);
-	// 	eosio::asset highest = eosio::asset(0, paymentSymbol);
-	// 	std::vector<globals::Star> stars;
-	// 	auto primary_key() const { return id; }
-	// };
 	TABLE statusstruct {
 		uint64_t id;
 		uint32_t start;

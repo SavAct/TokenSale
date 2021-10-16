@@ -3,11 +3,13 @@ From backend to frontend; a decentralized version of a token sale. With a fix pr
 
 # Features
 - Linear price increase.
+- Selection of differend funding accounts.
 - Integration of affiliate codes.
 - Optional integration of a SavWeb landing page.
+- On a deposit, the required memory is automatically acquired.
 - Compatible with deposits via crypto exchanges.
-- No account needed; but creates one on desire.
-- Self-purchase of needed memory issued on individual deposits.
+- No account needed; but creates one on demand.
+
 
 # Actions
 ```cpp
