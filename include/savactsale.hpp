@@ -225,6 +225,13 @@ public:
 
 	 	amountlist_table _amountlist(get_self(), get_self().value);
 		affis_table _affi_Table(get_self(), get_self().value);
+		index_table _indexTable(get_self(), get_self().value);
+
+		// Delete all ref pages
+		auto itr0 = _indexTable.begin();
+		while (itr0 != _indexTable.end()) {
+			itr0 = _indexTable.erase(itr0);
+		}
 
 		// Delete all records in amounts table
 		auto itr1 = _amountlist.begin();
