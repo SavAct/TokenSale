@@ -5,7 +5,7 @@
 
 using namespace eosio;
 
-#define defined_token_contract "meinacttoken"
+#define defined_token_contract "savtesttoken"	//- token.savact
 
 // Singletons cannot be shown by the nodes, therefore a multiindextable is used
 class globals
@@ -28,6 +28,7 @@ public:
 	static constexpr double  EndPrice	= 0.10; 			// EOS
 	static constexpr int64_t GiftForLastBuyer = 1000000;    // 100 SavAct // Should be more than EndPrice * minSystemTokenAmount to avoid unsaleable tokens
 	static constexpr eosio::name TokenContractName = name(defined_token_contract); //- "savact.token"_n
+	static constexpr int64_t minPayOnCreateAcc = 100000; 	// EOS
 
 	static constexpr int StarAmount = 3;
 	static constexpr int64_t Mark[StarAmount] { 243200000000, 486400000000, 2432000000000 };	//  10%, 20% and 100%
@@ -65,7 +66,7 @@ public:
 	// Initialize the start time
 	void init(int32_t startTime);
 
-	// functions to freeze the contract:
+	// Functions to freeze the contract:
 	// get the frozen state of the contract
 	bool isFrozen();
 	// set the status of the contract to frozen or unfrozen
@@ -139,7 +140,7 @@ void globals::checkTime()
 	eosio::check(eosio::current_time_point().sec_since_epoch() >= _status.begin()->start, "Start time has not been reached yet!");
 
 	_status.modify(_status.begin(), _self, [&](auto& entry) {
-		entry.start = true;
+		entry.started = true;
 	});
 }
 

@@ -361,6 +361,6 @@ private:
 	
 	// Parameters for account creation
 	static constexpr int ramForUser = 4000;		// Bytes of RAM
-	static constexpr int netCostForUser = 1000;	// amount in system token 
+	static constexpr int netCostForUser = 500;	// amount in system token 
 	static constexpr int cpuCostForUser = 1000;	// amount in system token
 };

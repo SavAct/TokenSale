@@ -9,9 +9,9 @@ inline void savactsale::donate(name from, name to, asset& fund, string& memo) {
 	check(memo.length() > 0, "Empty Memo!");
 	check(fund.is_valid(), "Invalid token transfer");
 	check(fund.amount > 0, "Zero amount");
-	check(fund.amount >= minSystemTokenAmount, "Minimum is 1000 of the smallest unit. For EOS this is 0.1000 EOS.");  //- limit sinnvoll? Sollte mindestens über den Kosten des RAM sein
+	check(fund.amount >= minSystemTokenAmount, "The minimum deposit amount is not reached.");
 
-	// Check 
+	// Check special accounts
 	for (const eosio::name& donAcc : donationAccounts){
 		check(donAcc != from, "Donation accounts can't participate.");
 	}
@@ -21,7 +21,12 @@ inline void savactsale::donate(name from, name to, asset& fund, string& memo) {
 
 	// Check memo parameters
 	check(order.user.size() > 0, "There was no user or public key defined.");
-	check(!(order.user.size() > 1 && order.user[0].index() == order.user[1].index()), "Two parameters have the same type. Use only one name and one public key.");
+
+	// Checks for account cration
+	if(order.user.size() > 1){
+		check(order.user[0].index() != order.user[1].index(), "Two parameters have the same type. Use only one name and one public key.");
+		check(globals::minPayOnCreateAcc <= fund.amount, "Deposit is not enough to get tokens and create an account at the same time.");
+	}
 	check(order.donationAccNumber >= 0 && order.donationAccNumber < std::size(donationAccounts), "This number referres to no donation account.");
 	
 	int64_t contractToken;		// Holds the amount of contract token for the user
@@ -165,7 +170,8 @@ void savactsale::buyAccount(public_key& pubkey, name account, asset& fund){
 	check(!is_account(account), "The account name is already taken.");
 
 	// remove the cost for a new account
-	fund.amount -= (netCostForUser + cpuCostForUser);
+	int64_t ramCostForUser = EosioHandler::calcRamPrice(ramForUser);
+	fund.amount -= (netCostForUser + cpuCostForUser + ramCostForUser);
 	check(fund.amount > 0, "Not enough amount to create an account");
 
 	// Create the account
