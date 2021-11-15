@@ -173,18 +173,23 @@ public:
 	}
 
 	/** Pay off contract tokens to the account name
+	*	@param currenttime	The current unix timestamp
 	*	@param tokenowner	Account name which should get the contract tokens
-	* 	@param sig			Signature of the token owner account name
+	* 	@param sig			Signature of the string "{contract account name} {currenttime} {tokenowner}" (without quote signs or curly braces)
 	* 	@param pubkey		Public key of the token owner
+	*	@param rampayer		Account name which pays the RAM
 	*/
-	ACTION payoff(name tokenowner, const signature& sig, const public_key& pubkey, name rampayer) {
+	ACTION payoff(uint32_t currenttime, name tokenowner, const signature& sig, const public_key& pubkey, name rampayer) {
 		check(is_account(tokenowner), "Can't pay off to this name. It doesn't exists.");
+		check(eosio::current_time_point().sec_since_epoch() - currenttime < 600, "Mentioned time is older than 10 min.");
 		globalStatus.checkFrozen();
+
 		check(pubkey.index() == 0, "This public key format is not in use.");
 		ecc_public_key public_key = std::get<0>(pubkey);
 
 		// Check the signature with the token owner
-		calc::ecVerify(tokenowner.to_string(), sig, pubkey);
+		string checkString =  get_self().to_string() + std::string(" ") + std::to_string(currenttime) + std::string(" ") + tokenowner.to_string();
+		calc::ecVerify(checkString, sig, pubkey);
 
 		// Get token amount
 		amountlist_table _amountlist(get_self(), get_self().value);
@@ -360,7 +365,25 @@ private:
 	static constexpr int PubKeyWithoutPrimarySize = 33 - sizeof(uint64_t);
 	
 	// Parameters for account creation
-	static constexpr int ramForUser = 4000;		// Bytes of RAM
-	static constexpr int netCostForUser = 500;	// amount in system token 
-	static constexpr int cpuCostForUser = 1000;	// amount in system token
+	static constexpr int ramForUser = 4000;			// Bytes of RAM
+	static constexpr int netCostForUser = 5000;		// amount in system token 
+	static constexpr int cpuCostForUser = 10000;	// amount in system token
 };
+
+// Caslculation results for needed RAM:
+//
+// The following amount of bytes need to be provided by the contract.
+// 241 (old) Status initialisation		[uint64][bool][int64] => new has [uint64][uint32][bool][bool][bool][int64][asset][asset][int64][Star[3]];
+// 112 Create affiliate name tabele 	[name][int64][bool]
+// 112 Create purchased key table 		[uint64][list[uint64][uint64][vector<char, 25>]]
+// + 163 Bytes for temporary handlings
+// ------------------
+// 628 Bytes 
+
+// 77 Payoff => Releasing 163 Bytes by removing the line and consumes 240 Bytes for opening an entry in token contract  
+
+// The following amount on RAM will be purchased automatically by a user payment. It doesn't reduce the amount of contract token.
+// 129 New affiliate name entry
+// 163 New purchased table entry
+//  42 New owner without a new primary key purchased table
+// 240 Open an entry in eosio.token contract 

@@ -109,6 +109,10 @@
             "base": "",
             "fields": [
                 {
+                    "name": "currenttime",
+                    "type": "uint32"
+                },
+                {
                     "name": "tokenowner",
                     "type": "name"
                 },

@@ -159,6 +159,4 @@ void globals::init(int32_t startTime)
 		entry.frozen = false;
 		entry.release = false;
 	});
-
-	
 }

@@ -126,7 +126,7 @@ int64_t savactsale::buyContractTokenAndAccreditAffiliate(MemoParams& order, asse
 
 	// Set the credited system token for the affiliate
 	if(dist.affiPercentage.system > 0) {
-		asset affiPayment = fund * dist.affiPercentage.system;		// Get the asset of payment token for the affiliate
+		asset affiPayment(fund.amount * dist.affiPercentage.system, globals::paymentSymbol);		// Get the asset of payment token for the affiliate
 		if(affiPayment.amount > 0) {
 			fund -= affiPayment;									// Calc the remaining payment token
 			EosioHandler::transfer(get_self(), std::get<name>(order.affiliate), affiPayment, "Thank you to be a part of SavAct.");
@@ -269,7 +269,7 @@ int32_t savactsale::transferContractToken(name to, int64_t amount, const string&
 	if(itr == _acctable.end()){
 		// Open access of contract token for the recipient
 		action {
-			permission_level{rampayer, "active"_n}, // TODO: Check if here should be named get_self() or rampayer
+			permission_level{rampayer, "active"_n},
 			globals::TokenContractName,
 			"open"_n,
 			std::make_tuple(to, globals::contractSymbol, rampayer)
@@ -315,8 +315,9 @@ std::list<savactsale::Owner>::const_iterator savactsale::findOwner(amountlist_ta
 
 void savactsale::GetToken(int64_t sumPayed, Distribution& dist){
 	// Set the payment amount higher before it will used in the calculation of bought contract tokens
-	int64_t addedAmount = (int64_t)(sumPayed * (UserPercentageForAffi + dist.affiPercentage.contract));
+	double totalPercentage = UserPercentageForAffi + dist.affiPercentage.contract;
+	int64_t addedAmount = (int64_t)(sumPayed * totalPercentage);
 	dist.amount.contract.user = buyContractToken(sumPayed + addedAmount);
-	dist.amount.contract.affiliate = dist.amount.contract.user * dist.affiPercentage.contract;		// get the amount for the affiliate
-	dist.amount.contract.user -= dist.amount.contract.affiliate;									// and the amount for the paying user	
+	dist.amount.contract.affiliate = dist.amount.contract.user * (dist.affiPercentage.contract / (1.0 + totalPercentage));		// Get the amount for the affiliate
+	dist.amount.contract.user -= dist.amount.contract.affiliate;																	// and the amount for the paying user	
 }
