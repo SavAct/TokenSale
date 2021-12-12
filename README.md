@@ -29,11 +29,13 @@ ACTION setpage(uint64_t key, vector<Ref>& refs, string& attri, string& fname)
 ```
 ```cpp
 /** Pay off contract tokens to the account name
+*	@param currenttime	The current unix timestamp
 *	@param tokenowner	Account name which should get the contract tokens
-* 	@param sig			Signature of the token owner account name
+* 	@param sig			Signature of the string "{contract account name} {currenttime} {tokenowner}" (without quote signs or curly braces)
 * 	@param pubkey		Public key of the token owner
+*	@param rampayer		Account name which pays the RAM
 */
-ACTION payoff(name tokenowner, const signature& sig, const public_key& pubkey, name rampayer)
+ACTION payoff(uint32_t currenttime, name tokenowner, const signature& sig, const public_key& pubkey, name rampayer)
 ```
 ```cpp
 /** Change the distribution model for an affiliate account name

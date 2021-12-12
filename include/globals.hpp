@@ -30,9 +30,9 @@ public:
 	static constexpr eosio::name TokenContractName = name(defined_token_contract); //- "savact.token"_n
 	static constexpr int64_t minPayOnCreateAcc = 100000; 	// EOS
 
-	static constexpr int StarAmount = 3;
-	static constexpr int64_t Mark[StarAmount] { 243200000000, 486400000000, 2432000000000 };	//  10%, 20% and 100%
-	static constexpr int64_t Gain[StarAmount] { 1000000000, 20000000000, 40000000000 };		    //  100,000 SavAct, 2,000,000 SavAct and 4,000,000 SavAct
+	static constexpr int StarAmount = 4;
+	static constexpr int64_t Mark[StarAmount] { 24320000000, 243200000000, 486400000000, 2432000000000 };	//  1%, 10%, 20% and 100%
+	static constexpr int64_t Gain[StarAmount] { 100000000, 1000000000, 20000000000, 40000000000 };		    //  10,000 SavAct, 100,000 SavAct, 2,000,000 SavAct and 4,000,000 SavAct
 
 	// Whole sale value in EOS: ((EndPrice + StartPrice) * TotalToken / 2) - Gift
 
@@ -159,4 +159,6 @@ void globals::init(int32_t startTime)
 		entry.frozen = false;
 		entry.release = false;
 	});
+
+	
 }
