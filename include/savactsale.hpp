@@ -101,7 +101,7 @@ private:
 	globals globalStatus;
 
 	// Recipients of the funding which can be chosen by the contributor
-	name donationAccounts[6] = {
+	name donationAccounts[5] = {
 		name("savactsavact"),
 		name("savactsavpay"),
 		name("savactvoting"),

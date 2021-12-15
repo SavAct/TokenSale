@@ -5,7 +5,7 @@
 
 using namespace eosio;
 
-#define defined_token_contract "savtesttoken"	//- token.savact
+#define defined_token_contract "token.savact"
 
 // Singletons cannot be shown by the nodes, therefore a multiindextable is used
 class globals
@@ -27,12 +27,12 @@ public:
 	static constexpr double  StartPrice = 0.04; 			// EOS    		
 	static constexpr double  EndPrice	= 0.10; 			// EOS
 	static constexpr int64_t GiftForLastBuyer = 1000000;    // 100 SavAct // Should be more than EndPrice * minSystemTokenAmount to avoid unsaleable tokens
-	static constexpr eosio::name TokenContractName = name(defined_token_contract); //- "savact.token"_n
+	static constexpr eosio::name TokenContractName = name(defined_token_contract);
 	static constexpr int64_t minPayOnCreateAcc = 100000; 	// EOS
 
-	static constexpr int StarAmount = 4;
-	static constexpr int64_t Mark[StarAmount] { 24320000000, 243200000000, 486400000000, 2432000000000 };	//  1%, 10%, 20% and 100%
-	static constexpr int64_t Gain[StarAmount] { 100000000, 1000000000, 20000000000, 40000000000 };		    //  10,000 SavAct, 100,000 SavAct, 2,000,000 SavAct and 4,000,000 SavAct
+	static constexpr int StarAmount = 5;
+	static constexpr int64_t Mark[StarAmount] { 2432000000, 24320000000, 243200000000, 486400000000, 2432000000000 };	// 0,1%, 1%, 10%, 20% and 100%
+	static constexpr int64_t Gain[StarAmount] { 100000000, 1000000000, 5000000000, 10000000000, 20000000000 };		    // 10,000 SavAct, 100,000 SavAct, 500,000 SavAct, 1,000,000 SavAct and 2,000,000 SavAct
 
 	// Whole sale value in EOS: ((EndPrice + StartPrice) * TotalToken / 2) - Gift
 

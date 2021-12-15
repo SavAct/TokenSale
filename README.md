@@ -58,6 +58,7 @@ Default values defined in globals.hpp
 - Start price: **0.04 EOS**
 - End price: **0.1 EOS**
 - All from the last remaining **100 SAVACT** will be given to the last payer as gift, to settle rounding differences.
+- Steps marked in RAM by 0.1%, 1% 10%, 20% and 100%. Can be used to pay out a bonus to the biggest participant until the respective step.
 
 # Licence
 The whole project is open source and free to use, see MIT licence. Feel free to suggest improvements.
