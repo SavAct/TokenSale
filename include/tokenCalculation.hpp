@@ -25,7 +25,7 @@ public:
 		
 		int64_t newSoldTotal = (int64_t)sqrt((k * sumPayed) + (oldS*oldS)) - startT;	
 
-		// The last buyer gets a bit more token. Because of calculation roundings this may be needed to sell all token 
+		// The last buyer gets a bit more token. Because of calculation rounding this may be needed to sell all token 
 		int64_t rest = globals::TotalToken - newSoldTotal;
 		if(rest <= globals::GiftForLastBuyer){
 			// Check that the total token amount is not surpassed

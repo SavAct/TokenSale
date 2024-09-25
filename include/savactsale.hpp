@@ -18,7 +18,7 @@ CONTRACT savactsale : public contract{
 
 public:
 
-	// Owner of the bougth token
+	// Owner of the bought token
 	struct Owner
 	{
 		std::vector<char> key;
@@ -68,13 +68,13 @@ private:
 	};
 	typedef multi_index<name("nameaffis"), affiList> affis_table;
 
-	/**
-	 * Table to store a savweb files
+  /**
+	 * Table to store SavWeb files
 	*/
 	TABLE static_index_table {
 		uint64_t      key;        // Primary key
 		string        fname;      // File name with name extention
-		vector<Ref>   refs;       // ref[0] contains reffered trasnaction of the first transaction. If the file is portioned there is a second entry ref[1] with a reference to the last entry  
+		vector<Ref>   refs;       // ref[0] contains referred transaction of the first transaction. If the file is portioned there is a second entry ref[1] with a reference to the last entry  
 		string        attri;      // Attributes / optional moreover stuff
 		
 		auto primary_key() const { return key; }
@@ -130,7 +130,7 @@ public:
 	}
 
 	/** Initialize the contract by setting a start time and unfreeze the contract   
-	 * @param startime Unix time stamp. From that time on payments are accepted  
+	 * @param starttime Unix time stamp. From that time on payments are accepted  
 	 */
 	ACTION createsale(uint32_t starttime) {
 		require_auth(get_self());
@@ -311,14 +311,14 @@ private:
 
 	/** Buy an account for the user and reduce the fund by its costs
 	*	@param pubkey	Public key of the new account
-	*	@param account	Name of the nuew account
+	*	@param account	Name of the new account
 	*	@param fund 	Available funds to creat an account
 	*/
 	void buyAccount(public_key& pubkey, name account, asset& fund);
 
 	/** Converts the last 8 Bytes of an eos public key data to an integer.
 	*	@param ecc_public_key	Public key
-	*	@return 				Integeger as recast of the last 8 bytes
+	*	@return 				Integer as recast of the last 8 bytes
 	*/
 	static uint64_t getIntFromPubKey(const ecc_public_key& pub_key);
 
@@ -330,7 +330,7 @@ private:
 
 	/** Buy the amount of contract token which can be bought with the amount of payed token and the added percentages
 	*	@param sumPayed		Sum of the payed token for real
-	* 	@param dist			Should contains the destribution percentages before and stores the destribution results after executing this function. 
+	* 	@param dist			Should contains the distribution percentages before and stores the distribution results after executing this function. 
 	*/
 	void GetToken(int64_t sumPayed, Distribution& dist);
 
@@ -370,11 +370,11 @@ private:
 	static constexpr int cpuCostForUser = 10000;	// amount in system token
 };
 
-// Caslculation results for needed RAM:
+// Calculation results for needed RAM:
 //
 // The following amount of bytes need to be provided by the contract.
 // 241 (old) Status initialisation		[uint64][bool][int64] => new has [uint64][uint32][bool][bool][bool][int64][asset][asset][int64][Star[3]];
-// 112 Create affiliate name tabele 	[name][int64][bool]
+// 112 Create affiliate name table 	[name][int64][bool]
 // 112 Create purchased key table 		[uint64][list[uint64][uint64][vector<char, 25>]]
 // + 163 Bytes for temporary handlings
 // ------------------

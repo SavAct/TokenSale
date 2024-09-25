@@ -7,7 +7,7 @@ using namespace eosio;
 
 #define defined_token_contract "token.savact"
 
-// Singletons cannot be shown by the nodes, therefore a multiindextable is used
+// Singletons cannot be shown by the nodes, therefore a multi index table is used
 class globals
 {
 public:

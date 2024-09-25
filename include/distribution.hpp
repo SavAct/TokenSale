@@ -1,6 +1,6 @@
 #pragma once
 
-// Steps in contract token int64_t uints for calculating the percentages for contract and system tokens.     // TODO: Values should be revised
+// Steps in contract token int64_t units for calculating the percentages for contract and system tokens.     // TODO: Values should be revised
 #define affiStep0   20000000
 #define affiStep1  200000000
 #define affiStep2  800000000

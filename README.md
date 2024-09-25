@@ -3,7 +3,7 @@ From backend to frontend; a decentralized version of a token sale. With a fix pr
 
 # Features
 - Linear price increase.
-- Selection of differend funding accounts.
+- Selection of different funding accounts.
 - Integration of affiliate codes.
 - Optional integration of a SavWeb landing page.
 - On a deposit, the required memory is automatically acquired.
@@ -14,7 +14,7 @@ From backend to frontend; a decentralized version of a token sale. With a fix pr
 # Actions
 ```cpp
 /** Initialize the contract by setting a start time and unfreeze the contract   
- * @param startime Unix time stamp. From that time on payments are accepted  
+ * @param starttime Unix time stamp. From that time on payments are accepted  
  */
 ACTION createsale(uint32_t starttime)
 ```
@@ -60,5 +60,5 @@ Default values defined in globals.hpp
 - All from the last remaining **100 SAVACT** will be given to the last payer as gift, to settle rounding differences.
 - Steps marked in RAM by 0.1%, 1% 10%, 20% and 100%. Can be used to pay out a bonus to the biggest participant until the respective step.
 
-# Licence
-The whole project is open source and free to use, see MIT licence. Feel free to suggest improvements.
+# License
+The whole project is open source and free to use, see MIT license. Feel free to suggest improvements.

@@ -68,7 +68,7 @@ public:
 
 	/** Buy RAM by bytes
 	*	@param payer		Account who pays in system token for the RAM 
-	*	@param receiver		Receier of the RAM
+	*	@param receiver		Receiver of the RAM
 	*	@param bytes		Amount of bytes which should be bought
 	*/
 	static void buyrambytes(name payer, name receiver, int32_t bytes);

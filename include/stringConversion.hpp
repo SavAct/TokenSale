@@ -14,7 +14,7 @@ public:
 	bool hasAffiliate = false;
 
 	/** Holds the parameters: user and affiliate name or public key and the donationNumber
-	*	@param memo	A string which contains the parameters seperated whit the chars of the static const parasigns property
+	*	@param memo	A string which contains the parameters separated by the chars of the static const parasigns property
 	*/
 	MemoParams(const string& memo)
 	{
@@ -25,7 +25,7 @@ public:
 		GetParams(_memo);
 	}
 
-	/** The signs to seperate the memo. The sequence of the chars are importend. */
+	/** The signs to separate the memo. The sequence of the chars are imported. */
 	inline static const string parasigns = "- #@";
 
 	/** Set a parameter from string
@@ -118,7 +118,7 @@ public:
 		return Name;
 	}
 
-	/** Convert the pulic key from string to array<char, 33>
+	/** Convert the public key from string to array<char, 33>
 	*	@return The public key
 	*/
 	static ecc_public_key string_to_ecc_public_key(const string& public_key_str)
